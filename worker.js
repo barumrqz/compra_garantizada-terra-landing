@@ -60,11 +60,12 @@ export default {
                     sha256(normEmail), sha256(normPhone), sha256(normFirstName), sha256(normLastName)
                 ]);
 
-                // VARIABLES DE ENTORNO CLOUDFLARE
-                // (Si no las configuras en Cloudflare, usa las de fallback)
-                const META_DATASET_ID = env.META_DATASET_ID || 'YOUR_PIXEL_ID';
-                const META_ACCESS_TOKEN = env.META_ACCESS_TOKEN || 'YOUR_ACCESS_TOKEN';
-                const GHL_WEBHOOK_URL = env.GHL_WEBHOOK_URL || 'https://hooks.markgrowth.pro/webhook/terra-diagnostico';
+                const META_DATASET_ID = env.META_DATASET_ID || 'YOUR_META_PIXEL_ID';
+                const META_ACCESS_TOKEN = env.META_ACCESS_TOKEN || 'YOUR_META_ACCESS_TOKEN';
+
+                // GHL API V2 (Private Integration Token)
+                const GHL_ACCESS_TOKEN = env.GHL_ACCESS_TOKEN || 'YOUR_GHL_ACCESS_TOKEN';
+                const GHL_LOCATION_ID = env.GHL_LOCATION_ID || 'YOUR_LOCATION_ID';
 
                 // CAPI PAYLOAD
                 const capiPayload = {
@@ -102,26 +103,87 @@ export default {
                     body: JSON.stringify(capiPayload)
                 });
 
-                // GHL PAYLOAD
+                // GHL PAYLOAD (API V2: Contacts)
+                // Usando upsert para actualizar si ya existe, buscando por email/teléfono
                 const ghlPayload = {
-                    ...data,
-                    client_ip: clientIP,
-                    user_agent: userAgent,
-                    attribution: {
-                        first_click: data.first_touch || {},
-                        last_click: data.last_touch || {},
-                        ad_journey: data.ad_journey || []
+                    locationId: GHL_LOCATION_ID,
+                    firstName: normFirstName,
+                    lastName: normLastName,
+                    email: normEmail,
+                    phone: '+' + normPhone, // GHL prefiere el formato internacional estandarizado
+                    tags: ["landing_evaluacion", "api_directa"],
+                    source: "Terra Compra Garantizada",
+                    customFields: [
+                        // Aquí mapeas los Custom Fields Creados en tu Subcuenta
+                        // Debes conseguir el ID del campo en Settings > Custom Fields
+                        {
+                            id: env.GHL_FIELD_SITUACION || 'ZqhjRk3qpd6h72qrGHTJ',
+                            field_value: data.situacion || ''
+                        },
+                        {
+                            id: env.GHL_FIELD_ADEUDO || 'rSdAto1Gs3169a5Xoxm2',
+                            field_value: data.adeudo || ''
+                        },
+                        {
+                            id: env.GHL_FIELD_UBICACION || 'pXWbHc17gFWLnPwh25ff',
+                            field_value: data.ubicacion || ''
+                        },
+                        {
+                            id: env.GHL_FIELD_URGENCIA || 'zZ6Yb7X4k3enahD3mgUO',
+                            field_value: data.urgencia || ''
+                        },
+                        {
+                            id: env.GHL_FIELD_UTM_JOURNEY || 'OI507tXb9GeiGgN3FTID',
+                            // Convertimos el JSON extenso a texto para que sea visible en la ficha de GHL
+                            field_value: JSON.stringify({
+                                first_click: data.first_touch || {},
+                                last_click: data.last_touch || {},
+                                all_touches: data.ad_journey || []
+                            })
+                        }
+                    ]
+                };
+
+                const ghlHeaders = {
+                    'Authorization': `Bearer ${GHL_ACCESS_TOKEN}`,
+                    'Version': '2021-07-28',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                };
+
+                const ghlPromise = async () => {
+                    const res = await fetch('https://services.leadconnectorhq.com/contacts/', {
+                        method: 'POST',
+                        headers: ghlHeaders,
+                        body: JSON.stringify(ghlPayload)
+                    });
+
+                    if (res.ok) {
+                        const jsonRes = await res.json();
+                        const contactId = jsonRes.contact?.id;
+
+                        // Crear Oportunidad en Pipeline "Terra Interés Social" > "Nuevo Lead"
+                        if (contactId) {
+                            const oppPayload = {
+                                locationId: GHL_LOCATION_ID,
+                                contactId: contactId,
+                                pipelineId: env.GHL_PIPELINE_ID || 'Yd2KKgmW67huLnfz1EFT',
+                                pipelineStageId: env.GHL_STAGE_ID || '6f63fcb8-e175-4a3e-a642-10104e7f019a',
+                                name: `${rawName || 'Lead'} - Terra Landing`,
+                                status: "open"
+                            };
+
+                            await fetch('https://services.leadconnectorhq.com/opportunities/', {
+                                method: 'POST',
+                                headers: ghlHeaders,
+                                body: JSON.stringify(oppPayload)
+                            });
+                        }
                     }
                 };
 
-                const ghlReq = fetch(GHL_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(ghlPayload)
-                });
-
                 // PARALLEL EXECUTION (Fail-safe)
-                await Promise.allSettled([metaReq, ghlReq]);
+                await Promise.allSettled([metaReq, ghlPromise()]);
 
                 return new Response(JSON.stringify({ success: true, event_id: data.event_id }), { headers, status: 200 });
 
