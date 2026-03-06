@@ -157,7 +157,7 @@ export default {
                 };
 
                 const ghlPromise = async () => {
-                    const res = await fetch('https://services.leadconnectorhq.com/contacts/', {
+                    const res = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
                         method: 'POST',
                         headers: ghlHeaders,
                         body: JSON.stringify(ghlPayload)
