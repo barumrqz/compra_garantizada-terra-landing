@@ -66,6 +66,7 @@ export default {
                 // GHL API V2 (Private Integration Token)
                 const GHL_ACCESS_TOKEN = env.GHL_ACCESS_TOKEN || 'YOUR_GHL_ACCESS_TOKEN';
                 const GHL_LOCATION_ID = env.GHL_LOCATION_ID || 'YOUR_LOCATION_ID';
+                const META_TEST_CODE = env.META_TEST_CODE || null;
 
                 // CAPI PAYLOAD
                 const capiPayload = {
@@ -96,6 +97,11 @@ export default {
                         }
                     }]
                 };
+
+                // Si hay código de prueba de Meta, se adjunta
+                if (META_TEST_CODE) {
+                    capiPayload.test_event_code = META_TEST_CODE;
+                }
 
                 // META REQUEST TRIGGER (Solo si NO es una situación problemática)
                 // "Alguien más vive ahí (traspaso informal)" contamina los prospectos ideales en Meta.
