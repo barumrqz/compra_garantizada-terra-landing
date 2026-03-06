@@ -646,7 +646,15 @@
                 card.addEventListener('click', function (e) {
                     if (isTransitioning) return;
                     const field = this.dataset.field;
-                    formData[field] = this.dataset.value;
+                    const value = this.dataset.value;
+
+                    // DISQUALIFIER LÓGICO
+                    if (field === 'ubicacion' && value === 'Fuera de SLP (otro estado)') {
+                        window.location.href = 'gracias_fuera.html';
+                        return;
+                    }
+
+                    formData[field] = value;
 
                     this.parentElement.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
                     this.classList.add('selected');
@@ -717,8 +725,8 @@
             formData.last_touch = JSON.parse(localStorage.getItem('last_touch_utms') || '{}');
             formData.ad_journey = JSON.parse(localStorage.getItem('ad_journey') || '[]');
 
-            // 3. Pixel Local (Frontend Lead con EventID)
-            if (typeof fbq !== 'undefined') {
+            // 3. Pixel Local (Frontend Lead con EventID) - Omitido si la situación es traspaso informal
+            if (typeof fbq !== 'undefined' && formData.situacion !== 'Alguien más vive ahí (traspaso informal)') {
                 fbq('track', 'Lead', { content_name: 'Diagnostico Terra' }, { eventID: event_id });
             }
 

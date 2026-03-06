@@ -97,11 +97,16 @@ export default {
                     }]
                 };
 
-                const metaReq = fetch(`https://graph.facebook.com/v19.0/${META_DATASET_ID}/events?access_token=${META_ACCESS_TOKEN}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(capiPayload)
-                });
+                // META REQUEST TRIGGER (Solo si NO es una situación problemática)
+                // "Alguien más vive ahí (traspaso informal)" contamina los prospectos ideales en Meta.
+                let metaReq = Promise.resolve(); // Promesa vacía por defecto
+                if (data.situacion !== 'Alguien más vive ahí (traspaso informal)') {
+                    metaReq = fetch(`https://graph.facebook.com/v19.0/${META_DATASET_ID}/events?access_token=${META_ACCESS_TOKEN}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(capiPayload)
+                    });
+                }
 
                 // GHL PAYLOAD (API V2: Contacts)
                 // Usando upsert para actualizar si ya existe, buscando por email/teléfono
@@ -111,7 +116,7 @@ export default {
                     lastName: normLastName,
                     email: normEmail,
                     phone: '+' + normPhone, // GHL prefiere el formato internacional estandarizado
-                    tags: ["landing_evaluacion", "api_directa"],
+                    tags: ["lead flipping", "diagnóstico compra garantizada", "api_directa"],
                     source: "Terra Compra Garantizada",
                     customFields: [
                         // Aquí mapeas los Custom Fields Creados en tu Subcuenta
@@ -162,13 +167,13 @@ export default {
                         const jsonRes = await res.json();
                         const contactId = jsonRes.contact?.id;
 
-                        // Crear Oportunidad en Pipeline "Terra Interés Social" > "Nuevo Lead"
+                        // Crear Oportunidad en Pipeline
                         if (contactId) {
                             const oppPayload = {
                                 locationId: GHL_LOCATION_ID,
                                 contactId: contactId,
-                                pipelineId: env.GHL_PIPELINE_ID || 'Yd2KKgmW67huLnfz1EFT',
-                                pipelineStageId: env.GHL_STAGE_ID || '6f63fcb8-e175-4a3e-a642-10104e7f019a',
+                                pipelineId: env.GHL_PIPELINE_ID || 'FTICLZZ1pokVnGmFYXam',
+                                pipelineStageId: env.GHL_STAGE_ID || '87ef379f-90a7-4060-99ff-de14eaadf628',
                                 name: `${rawName || 'Lead'} - Terra Landing`,
                                 status: "open"
                             };

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviso | Terra Grupo Inmobiliario</title>
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terra: {
+                            primary: '#D35400',
+                            secondary: '#1A2530',
+                            accent: '#27AE60',
+                            bg: '#F8F9FA',
+                            warm: '#FFF8F2',
+                            cream: '#FFFDF9',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-terra-cream text-terra-secondary min-h-screen flex flex-col items-center justify-center p-5">
+
+    <div
+        class="max-w-md w-full bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-2 bg-terra-primary"></div>
+
+        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span class="text-3xl">📍</span>
+        </div>
+
+        <h1 class="text-2xl font-extrabold text-terra-secondary mb-3 font-heading tracking-tight">Lo sentimos mucho</h1>
+
+        <p class="text-gray-500 font-body mb-8 leading-relaxed text-sm">
+            Por el momento, en Terra Grupo Inmobiliario <strong>solo compramos propiedades que se encuentren dentro del
+                estado de San Luis Potosí</strong>.
+            <br><br>
+            Agradecemos mucho tu interés y esperamos poder expandir nuestros servicios a tu estado pronto.
+        </p>
+
+        <div class="space-y-3">
+            <a href="index.html"
+                class="block w-full py-3 px-4 bg-terra-bg border border-gray-200 text-terra-secondary font-bold rounded-xl hover:bg-gray-100 transition-colors text-sm font-heading">
+                ← Me equivoqué de opción, regresar
+            </a>
+
+            <a href="https://wa.me/524441234567?text=Hola%2C%20tengo%20una%20duda%20sobre%20mi%20propiedad%20fuera%20de%20SLP"
+                class="inline-flex items-center justify-center w-full gap-2 text-terra-accent hover:text-green-700 font-semibold text-sm transition-colors mt-4">
+                Tengo una duda, quiero hablar con un asesor
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
