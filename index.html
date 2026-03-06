@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vende tu Casa con Deuda de Infonavit | Terra Grupo Inmobiliario</title>
+    <meta name="description"
+        content="Compramos tu casa con deuda de Infonavit en San Luis Potosí. Liberación ante Notario, pagamos tus adeudos y te damos dinero en efectivo. Compra Garantizada.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terra: {
+                            primary: '#D35400',
+                            secondary: '#1A2530',
+                            accent: '#27AE60',
+                            bg: '#F8F9FA',
+                            warm: '#FFF8F2',
+                            cream: '#FFFDF9',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .step-hidden {
+            display: none;
+        }
+
+        .step-active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .option-card {
+            transition: all 0.15s ease;
+        }
+
+        .option-card:hover {
+            transform: scale(1.01);
+            border-color: #D35400;
+        }
+
+        .option-card.selected {
+            border-color: #D35400;
+            background: #FFF3E8;
+        }
+
+        .hero-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D35400' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+
+    <!-- ============================================ -->
+    <!-- META PIXEL (Facebook) — Replace YOUR_PIXEL_ID -->
+    <!-- ============================================ -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" /></noscript>
+</head>
+
+<body class="bg-terra-cream text-terra-secondary overflow-x-hidden min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <nav class="w-full py-3 px-5 md:px-10 flex justify-between items-center bg-white shadow-sm sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" class="w-9 h-9">
+                <rect x="0" y="0" width="220" height="220" rx="45" fill="#1A2530" />
+                <path d="M 60 115 L 110 65 L 160 115" fill="none" stroke="#D35400" stroke-width="26"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M 110 105 L 110 160" fill="none" stroke="#FFFFFF" stroke-width="26" stroke-linecap="round" />
+            </svg>
+            <div class="leading-tight">
+                <span class="text-terra-primary font-heading text-[9px] font-bold tracking-[2px] block uppercase">Compra
+                    Garantizada</span>
+                <span class="font-heading font-extrabold text-lg tracking-wider text-terra-secondary block">TERRA</span>
+            </div>
+        </div>
+        <a href="#diagnostico"
+            class="bg-terra-primary text-white text-xs font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition-all font-heading uppercase tracking-wide hidden md:inline-block">
+            Solicitar Oferta
+        </a>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- HERO — Warm, Approachable, Human             -->
+    <!-- ============================================ -->
+    <section class="w-full px-5 md:px-8 pt-10 md:pt-14 pb-10 bg-white hero-pattern relative">
+        <div class="max-w-3xl mx-auto">
+            <!-- Trust Badge -->
+            <div
+                class="inline-flex items-center gap-2 bg-terra-accent/10 border border-terra-accent/30 rounded-full px-4 py-1.5 mb-5">
+                <svg class="w-4 h-4 text-terra-accent" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span class="text-terra-accent font-semibold text-xs font-body">Empresa formal en San Luis Potosí</span>
+            </div>
+
+            <h1 class="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-4 text-terra-secondary">
+                ¿Tienes una casa de Infonavit<br class="hidden md:block"> que <span
+                    class="text-terra-primary underline decoration-terra-primary/30 decoration-4 underline-offset-4">ya
+                    no puedes pagar?</span>
+            </h1>
+
+            <p class="text-base md:text-xl text-gray-600 leading-relaxed mb-6 max-w-xl font-body">
+                Te la compramos, liquidamos tu deuda y te damos dinero en efectivo. <strong
+                    class="text-terra-secondary">Todo ante Notario Público</strong>. Sin traspasos ilegales.
+            </p>
+
+            <!-- Quick Benefits Row -->
+            <div class="flex flex-wrap gap-3 mb-8">
+                <span
+                    class="inline-flex items-center gap-1.5 bg-terra-bg rounded-full px-4 py-2 text-sm font-medium text-terra-secondary border border-gray-200">
+                    ✅ Pagamos tus adeudos
+                </span>
+                <span
+                    class="inline-flex items-center gap-1.5 bg-terra-bg rounded-full px-4 py-2 text-sm font-medium text-terra-secondary border border-gray-200">
+                    ✅ Cubrimos el Notario
+                </span>
+                <span
+                    class="inline-flex items-center gap-1.5 bg-terra-bg rounded-full px-4 py-2 text-sm font-medium text-terra-secondary border border-gray-200">
+                    ✅ $10,000 de anticipo
+                </span>
+            </div>
+
+            <!-- CTA -->
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a href="#diagnostico"
+                    class="inline-block bg-terra-primary hover:bg-orange-600 text-white text-base font-bold py-4 px-8 rounded-xl transition-all font-heading text-center shadow-lg shadow-orange-200">
+                    Quiero que evalúen mi caso →
+                </a>
+                <a href="https://wa.me/524441234567?text=Hola%2C%20quiero%20vender%20mi%20casa%20con%20deuda%20de%20Infonavit"
+                    class="inline-flex items-center justify-center gap-2 bg-terra-accent/10 hover:bg-terra-accent/20 text-terra-accent text-base font-bold py-4 px-8 rounded-xl transition-all font-heading border border-terra-accent/30">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                    Escribir por WhatsApp
+                </a>
+            </div>
+
+            <p class="text-gray-400 text-xs mt-4 font-body">Evaluación gratuita, sin compromiso. Solo propiedades en
+                SLP.</p>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SOCIAL PROOF BAR                            -->
+    <!-- ============================================ -->
+    <section class="w-full bg-terra-secondary py-4 px-5">
+        <div
+            class="max-w-3xl mx-auto flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 text-center">
+            <div class="text-white">
+                <span class="font-extrabold text-2xl font-heading text-terra-primary">100+</span>
+                <span class="text-gray-300 text-sm ml-1 font-body">casas compradas</span>
+            </div>
+            <div class="hidden md:block w-px h-8 bg-white/20"></div>
+            <div class="text-white">
+                <span class="font-extrabold text-2xl font-heading text-terra-primary">24 hrs</span>
+                <span class="text-gray-300 text-sm ml-1 font-body">para tu oferta</span>
+            </div>
+            <div class="hidden md:block w-px h-8 bg-white/20"></div>
+            <div class="text-white">
+                <span class="font-extrabold text-2xl font-heading text-terra-primary">100%</span>
+                <span class="text-gray-300 text-sm ml-1 font-body">ante Notario Público</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- HOW IT WORKS — Friendly Cards               -->
+    <!-- ============================================ -->
+    <section class="w-full px-5 md:px-8 py-14 bg-terra-bg">
+        <div class="max-w-3xl mx-auto">
+            <p class="text-terra-primary font-bold text-sm uppercase tracking-widest mb-2 font-heading text-center">
+                Proceso simple</p>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-center mb-10 tracking-tight text-terra-secondary">
+                Así funciona
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100 relative">
+                    <div
+                        class="w-10 h-10 rounded-full bg-terra-primary text-white font-extrabold text-lg flex items-center justify-center mx-auto mb-4 font-heading">
+                        1</div>
+                    <h3 class="font-bold text-terra-secondary text-sm mb-2">Cuéntanos tu caso</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed font-body">Llena el formulario o escríbenos por
+                        WhatsApp. Sin presión.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100">
+                    <div
+                        class="w-10 h-10 rounded-full bg-terra-primary text-white font-extrabold text-lg flex items-center justify-center mx-auto mb-4 font-heading">
+                        2</div>
+                    <h3 class="font-bold text-terra-secondary text-sm mb-2">Evaluamos tu propiedad</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed font-body">Revisamos tu crédito, adeudos y situación
+                        legal. Te damos una oferta clara.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100">
+                    <div
+                        class="w-10 h-10 rounded-full bg-terra-primary text-white font-extrabold text-lg flex items-center justify-center mx-auto mb-4 font-heading">
+                        3</div>
+                    <h3 class="font-bold text-terra-secondary text-sm mb-2">Firmamos ante Notario</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed font-body">Pagamos la deuda al Infonavit. Recibes tu
+                        anticipo en efectivo.</p>
+                </div>
+                <div
+                    class="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100 ring-2 ring-terra-accent/30">
+                    <div
+                        class="w-10 h-10 rounded-full bg-terra-accent text-white font-extrabold text-lg flex items-center justify-center mx-auto mb-4 font-heading">
+                        ✓</div>
+                    <h3 class="font-bold text-terra-accent text-sm mb-2">¡Listo!</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed font-body">El descuento se detiene. Tu nómina vuelve
+                        a ser tuya. Capítulo cerrado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- WHAT'S INCLUDED — Reassurance Section       -->
+    <!-- ============================================ -->
+    <section class="w-full px-5 md:px-8 py-14 bg-white">
+        <div class="max-w-3xl mx-auto">
+            <p class="text-terra-primary font-bold text-sm uppercase tracking-widest mb-2 font-heading text-center">Sin
+                letra chiquita</p>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-center mb-10 tracking-tight text-terra-secondary">
+                ¿Qué incluye nuestra oferta?
+            </h2>
+
+            <div class="space-y-4">
+                <div class="flex items-start gap-4 bg-terra-bg rounded-xl p-5 border border-gray-100">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-terra-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span class="text-terra-primary text-xl">🏠</span>
+                    </div>
+                    <div>
+                        <p class="font-bold text-terra-secondary text-sm mb-0.5 font-heading">Compramos tu casa directo
+                        </p>
+                        <p class="text-gray-500 text-sm font-body">No somos intermediarios ni coyotes. Terra compra
+                            directamente tu propiedad.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 bg-terra-bg rounded-xl p-5 border border-gray-100">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-terra-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span class="text-terra-primary text-xl">📑</span>
+                    </div>
+                    <div>
+                        <p class="font-bold text-terra-secondary text-sm mb-0.5 font-heading">Liquidamos tu deuda con
+                            Infonavit</p>
+                        <p class="text-gray-500 text-sm font-body">Pagamos directo al Infonavit y cancelas tu crédito.
+                            Ya no te descuentan de nómina.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 bg-terra-bg rounded-xl p-5 border border-gray-100">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-terra-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span class="text-terra-primary text-xl">💧</span>
+                    </div>
+                    <div>
+                        <p class="font-bold text-terra-secondary text-sm mb-0.5 font-heading">Pagamos adeudos acumulados
+                        </p>
+                        <p class="text-gray-500 text-sm font-body">Predial, agua, luz — lo que se haya juntado. Tú no
+                            pones un peso.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 bg-terra-bg rounded-xl p-5 border border-gray-100">
+                    <div class="w-10 h-10 rounded-lg bg-terra-accent/10 flex items-center justify-center flex-shrink-0">
+                        <span class="text-terra-accent text-xl">⚖️</span>
+                    </div>
+                    <div>
+                        <p class="font-bold text-terra-secondary text-sm mb-0.5 font-heading">Todo ante Notario Público
+                        </p>
+                        <p class="text-gray-500 text-sm font-body">Nada "bajo el agua". Escrituras, cancelación y pago,
+                            todo documentado legalmente.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 bg-terra-bg rounded-xl p-5 border border-gray-100">
+                    <div class="w-10 h-10 rounded-lg bg-terra-accent/10 flex items-center justify-center flex-shrink-0">
+                        <span class="text-terra-accent text-xl">🏦</span>
+                    </div>
+                    <div>
+                        <p class="font-bold text-terra-secondary text-sm mb-0.5 font-heading">Tu subcuenta de vivienda
+                            intacta</p>
+                        <p class="text-gray-500 text-sm font-body">Conservas tu derecho a pedir otro crédito Infonavit
+                            en el futuro.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- FAQ — Common Fears                          -->
+    <!-- ============================================ -->
+    <section class="w-full px-5 md:px-8 py-14 bg-terra-warm">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-center mb-10 tracking-tight text-terra-secondary">
+                Preguntas frecuentes
+            </h2>
+            <div class="space-y-4">
+                <details class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm group" open>
+                    <summary
+                        class="font-bold text-terra-secondary text-sm cursor-pointer list-none flex justify-between items-center font-heading">
+                        ¿La deuda sigue a mi nombre después de vender?
+                        <span
+                            class="text-terra-primary text-xl font-body group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="text-gray-500 text-sm mt-3 leading-relaxed font-body">No. Nosotros liquidamos tu deuda
+                        directamente con Infonavit <strong>antes</strong> de cerrar la operación. Tu crédito queda
+                        oficialmente cancelado ante Notario. Ya no te descuentan de nómina.</p>
+                </details>
+                <details class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm group">
+                    <summary
+                        class="font-bold text-terra-secondary text-sm cursor-pointer list-none flex justify-between items-center font-heading">
+                        ¿Pierdo mi subcuenta de vivienda o mi ahorro?
+                        <span
+                            class="text-terra-primary text-xl font-body group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="text-gray-500 text-sm mt-3 leading-relaxed font-body">No. Tu subcuenta de vivienda en tu
+                        Afore queda intacta. Cuando quieras pedir otro crédito Infonavit en el futuro, podrás hacerlo
+                        sin problema.</p>
+                </details>
+                <details class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm group">
+                    <summary
+                        class="font-bold text-terra-secondary text-sm cursor-pointer list-none flex justify-between items-center font-heading">
+                        ¿Es diferente a un traspaso?
+                        <span
+                            class="text-terra-primary text-xl font-body group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="text-gray-500 text-sm mt-3 leading-relaxed font-body">Totalmente. En un traspaso informal
+                        ("bajo el agua") la escritura nunca cambia de nombre y la deuda sigue creciendo a tu nombre. Con
+                        Terra, la compra se formaliza ante Notario y tu crédito se cancela legalmente.</p>
+                </details>
+                <details class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm group">
+                    <summary
+                        class="font-bold text-terra-secondary text-sm cursor-pointer list-none flex justify-between items-center font-heading">
+                        ¿Cuánto dinero recibo?
+                        <span
+                            class="text-terra-primary text-xl font-body group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p class="text-gray-500 text-sm mt-3 leading-relaxed font-body">Recibes un anticipo de $10,000 MXN
+                        al momento de la firma, más el remanente una vez que se liquida completamente tu crédito. El
+                        monto final depende del valor de tu propiedad y el saldo de tu deuda.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MULTI-STEP FORM                             -->
+    <!-- ============================================ -->
+    <section id="diagnostico" class="w-full px-5 md:px-8 py-14 bg-white border-t-4 border-terra-primary">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-2 bg-terra-primary/10 rounded-full px-4 py-1.5 mb-3">
+                    <span class="text-terra-primary font-bold text-xs font-heading uppercase tracking-wide">Evaluación
+                        gratuita</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-terra-secondary tracking-tight font-heading">
+                    Cuéntanos tu situación
+                </h2>
+                <p class="text-gray-500 text-sm mt-2 font-body">4 preguntas rápidas y tus datos. Te contactamos en menos
+                    de 24
+                    horas.</p>
+            </div>
+
+            <!-- Progress -->
+            <div class="flex items-center gap-2 mb-6">
+                <div id="progressBar" class="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
+                    <div id="progressFill" class="bg-terra-primary h-2 rounded-full transition-all duration-300"
+                        style="width: 20%"></div>
+                </div>
+                <span id="stepCounter" class="text-xs text-gray-400 font-medium font-body">1/5</span>
+            </div>
+
+            <form id="terraForm" onsubmit="return false;">
+
+                <!-- STEP 1 -->
+                <div class="form-step step-active" data-step="1">
+                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿Cuál es tu situación actual?
+                    </p>
+                    <div class="space-y-3">
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="situacion" data-value="No vivo ahí y sigo pagando">
+                            <span class="font-medium text-terra-secondary text-sm font-body">🏚️ No vivo ahí y sigo
+                                pagando</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="situacion" data-value="Vivo ahí pero ya no puedo pagar">
+                            <span class="font-medium text-terra-secondary text-sm font-body">😰 Vivo ahí pero ya no
+                                puedo pagar</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="situacion" data-value="La casa está abandonada">
+                            <span class="font-medium text-terra-secondary text-sm font-body">🔒 La casa está
+                                abandonada</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="situacion" data-value="Alguien más vive ahí (traspaso informal)">
+                            <span class="font-medium text-terra-secondary text-sm font-body">👤 Alguien más vive ahí
+                                (traspaso informal)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div class="form-step step-hidden" data-step="2">
+                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿Tienes idea de cuánto debes
+                        al Infonavit?</p>
+                    <div class="space-y-3">
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="adeudo" data-value="Menos de $200,000">
+                            <span class="font-medium text-terra-secondary text-sm font-body">Menos de $200,000</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="adeudo" data-value="Entre $200,000 y $400,000">
+                            <span class="font-medium text-terra-secondary text-sm font-body">Entre $200,000 y
+                                $400,000</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="adeudo" data-value="Más de $400,000">
+                            <span class="font-medium text-terra-secondary text-sm font-body">Más de $400,000</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="adeudo" data-value="No sé cuánto debo">
+                            <span class="font-medium text-terra-secondary text-sm font-body">🤷 No sé cuánto debo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div class="form-step step-hidden" data-step="3">
+                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿En qué zona de SLP está tu
+                        casa?</p>
+                    <div class="space-y-3">
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="ubicacion" data-value="Soledad de Graciano Sánchez">
+                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Soledad de Graciano
+                                Sánchez</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="ubicacion" data-value="Zona sur / Prados / Hogares del Real">
+                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Zona sur / Prados /
+                                Hogares del Real</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="ubicacion" data-value="Zona centro / otra colonia">
+                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Zona centro / otra
+                                colonia</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="ubicacion" data-value="Fuera de SLP (otro estado)">
+                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Fuera de SLP (otro
+                                estado)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4 -->
+                <div class="form-step step-hidden" data-step="4">
+                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿Qué tan urgente es para ti
+                        resolver esto?</p>
+                    <div class="space-y-3">
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="urgencia" data-value="Esta semana necesito resolverlo">
+                            <span class="font-medium text-terra-secondary text-sm font-body">🔥 Esta semana necesito
+                                resolverlo</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="urgencia" data-value="Este mes quiero avanzar">
+                            <span class="font-medium text-terra-secondary text-sm font-body">⏰ Este mes quiero
+                                avanzar</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="urgencia" data-value="Solo estoy explorando opciones">
+                            <span class="font-medium text-terra-secondary text-sm font-body">🔍 Solo estoy explorando
+                                opciones</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 5: Contact -->
+                <div class="form-step step-hidden" data-step="5">
+                    <p class="text-terra-secondary font-bold text-base mb-2 font-heading">¡Último paso!</p>
+                    <p class="text-gray-500 text-sm mb-5 font-body">Déjanos tus datos y te contactamos en menos de 24
+                        horas con una propuesta.</p>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-terra-secondary mb-1 font-heading">Tu
+                                nombre</label>
+                            <input type="text" name="nombre" id="nombre" required placeholder="Ej: Juan Pérez"
+                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-terra-secondary font-medium focus:border-terra-primary focus:outline-none transition-colors font-body bg-terra-bg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-terra-secondary mb-1 font-heading">Tu
+                                WhatsApp (10 dígitos)</label>
+                            <input type="tel" name="telefono" id="telefono" required placeholder="Ej: 444 123 4567"
+                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-terra-secondary font-medium focus:border-terra-primary focus:outline-none transition-colors font-body bg-terra-bg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-terra-secondary mb-1 font-heading">Tu correo
+                                electrónico</label>
+                            <input type="email" name="correo" id="correo" required placeholder="Ej: juan@correo.com"
+                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-terra-secondary font-medium focus:border-terra-primary focus:outline-none transition-colors font-body bg-terra-bg">
+                        </div>
+                        <button type="button" onclick="submitForm()"
+                            class="w-full bg-terra-primary hover:bg-orange-600 text-white font-extrabold text-base py-4 rounded-xl transition-all uppercase tracking-wide font-heading shadow-lg shadow-orange-200">
+                            ENVIAR MI CASO →
+                        </button>
+                        <p class="text-gray-400 text-xs text-center font-body">Tus datos están protegidos. Cero spam.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div id="formNav" class="flex justify-between mt-5">
+                    <button type="button" id="btnBack" onclick="prevStep()"
+                        class="text-gray-400 hover:text-terra-secondary font-semibold text-sm py-2 px-4 rounded-lg transition-colors hidden font-body">
+                        ← Atrás
+                    </button>
+                    <div class="flex-1"></div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="w-full px-5 md:px-8 py-10 bg-terra-secondary text-center">
+        <p class="text-gray-300 text-sm mb-3 font-body max-w-md mx-auto">¿Prefieres hablar con alguien directamente?</p>
+        <a href="https://wa.me/524441234567?text=Hola%2C%20quiero%20vender%20mi%20casa%20con%20deuda%20de%20Infonavit"
+            class="inline-flex items-center gap-2 bg-terra-accent hover:bg-green-600 text-white font-bold py-3 px-8 rounded-xl transition-all font-heading text-sm">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Escríbenos por WhatsApp
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-terra-bg py-6 text-center text-xs text-gray-400 border-t border-gray-200 font-body">
+        <p>&copy; 2026 Terra Grupo Inmobiliario — Compra Garantizada. San Luis Potosí, México.</p>
+    </footer>
+
+    <!-- LOGIC (V5 Server-side Tracking) -->
+    <script>
+        // ============================================
+        // UTM & JOURNEY LOGGER (Multi-Touch Attribution)
+        // ============================================
+        function parseUTMs() {
+            const params = new URLSearchParams(window.location.search);
+            let utms = {};
+            for (let pair of params.entries()) {
+                if (pair[0].startsWith('utm_') || ['fbclid', 'gclid'].includes(pair[0])) {
+                    utms[pair[0]] = pair[1];
+                }
+            }
+            return utms;
+        }
+
+        function recordJourney() {
+            const currentUTMs = parseUTMs();
+            if (Object.keys(currentUTMs).length === 0) return; // Ignore pure organic to not mess up historical touches
+
+            const timestamp = new Date().toISOString();
+            const touchPoint = { ...currentUTMs, timestamp: timestamp };
+
+            // FIRST TOUCH
+            if (!localStorage.getItem('first_touch_utms')) {
+                localStorage.setItem('first_touch_utms', JSON.stringify(touchPoint));
+            }
+            // LAST TOUCH
+            localStorage.setItem('last_touch_utms', JSON.stringify(touchPoint));
+            // AD JOURNEY
+            let journey = JSON.parse(localStorage.getItem('ad_journey') || '[]');
+            journey.push(touchPoint);
+            localStorage.setItem('ad_journey', JSON.stringify(journey));
+        }
+        recordJourney();
+
+        function getCookie(name) {
+            const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+            return v ? v.pop() : '';
+        }
+
+        // ============================================
+        // FORM WIZARD STATE
+        // ============================================
+        let currentStep = 1;
+        const totalSteps = 5;
+        const formData = {};
+        let isTransitioning = false;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.option-card[data-field]').forEach(card => {
+                card.addEventListener('click', function (e) {
+                    if (isTransitioning) return;
+                    const field = this.dataset.field;
+                    formData[field] = this.dataset.value;
+
+                    this.parentElement.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    if (typeof fbq !== 'undefined') { fbq('trackCustom', 'FormStep', { step: currentStep, field }); }
+
+                    isTransitioning = true;
+                    setTimeout(() => { nextStep(); isTransitioning = false; }, 350);
+                });
+            });
+        });
+
+        function nextStep() {
+            if (currentStep >= totalSteps) return;
+            document.querySelector(`[data-step="${currentStep}"]`).classList.replace('step-active', 'step-hidden');
+            currentStep++;
+            document.querySelector(`[data-step="${currentStep}"]`).classList.replace('step-hidden', 'step-active');
+            updateUI();
+        }
+
+        function prevStep() {
+            if (currentStep <= 1) return;
+            document.querySelector(`[data-step="${currentStep}"]`).classList.replace('step-active', 'step-hidden');
+            currentStep--;
+            document.querySelector(`[data-step="${currentStep}"]`).classList.replace('step-hidden', 'step-active');
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('progressFill').style.width = (currentStep / totalSteps * 100) + '%';
+            document.getElementById('stepCounter').textContent = currentStep + '/' + totalSteps;
+            document.getElementById('btnBack').classList.toggle('hidden', currentStep <= 1);
+        }
+
+        // ============================================
+        // FORM SUBMIT (UUID + CAPI Fetch + Redirección)
+        // ============================================
+        function generateUUID() {
+            return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+        }
+
+        async function submitForm() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+            const correo = document.getElementById('correo').value.trim();
+
+            if (!nombre || !telefono || !correo) { alert('Por favor completa todos tus datos.'); return; }
+
+            const btn = document.querySelector('button[onclick="submitForm()"]');
+            if (btn) {
+                btn.innerHTML = 'ENVIANDO...';
+                btn.disabled = true;
+            }
+
+            formData.nombre = nombre; formData.telefono = telefono; formData.correo = correo;
+
+            // 1. UUID para Deduplicación
+            const event_id = (window.crypto && window.crypto.randomUUID) ? window.crypto.randomUUID() : generateUUID();
+            formData.event_id = event_id;
+
+            // 2. Extracción Final
+            formData.fbp = getCookie('_fbp');
+            formData.fbc = getCookie('_fbc');
+            formData.source_url = window.location.href;
+            formData.first_touch = JSON.parse(localStorage.getItem('first_touch_utms') || '{}');
+            formData.last_touch = JSON.parse(localStorage.getItem('last_touch_utms') || '{}');
+            formData.ad_journey = JSON.parse(localStorage.getItem('ad_journey') || '[]');
+
+            // 3. Pixel Local (Frontend Lead con EventID)
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', { content_name: 'Diagnostico Terra' }, { eventID: event_id });
+            }
+
+            // 4. Server-Side Fetch a Cloudflare Worker
+            try {
+                await fetch('/api/lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+            } catch (e) { console.error('Worker fetch fail:', e); }
+
+            // 5. Redireccionar SIEMPRE, haya fetch exitoso o no (Fail-safe)
+            window.location.href = 'gracias.html';
+        }
+    </script>
+</body>
+
+</html>
