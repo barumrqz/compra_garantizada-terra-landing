@@ -105,6 +105,7 @@ export default {
 
                 // META REQUEST TRIGGER (Solo si NO es una situación problemática)
                 // "Alguien más vive ahí (traspaso informal)" contamina los prospectos ideales en Meta.
+                console.log("--> META PAYLOAD:", JSON.stringify(capiPayload));
                 let metaReq = Promise.resolve(); // Promesa vacía por defecto
                 if (data.situacion !== 'Alguien más vive ahí (traspaso informal)') {
                     metaReq = fetch(`https://graph.facebook.com/v19.0/${META_DATASET_ID}/events?access_token=${META_ACCESS_TOKEN}`, {
@@ -162,6 +163,7 @@ export default {
                     'Accept': 'application/json'
                 };
 
+                console.log("--> GHL PAYLOAD:", JSON.stringify(ghlPayload));
                 const ghlPromise = async () => {
                     const res = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
                         method: 'POST',
