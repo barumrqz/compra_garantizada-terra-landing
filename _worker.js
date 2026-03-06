@@ -106,13 +106,13 @@ export default {
                 // META REQUEST TRIGGER (Solo si NO es una situación problemática)
                 // "Alguien más vive ahí (traspaso informal)" contamina los prospectos ideales en Meta.
                 console.log("--> META PAYLOAD:", JSON.stringify(capiPayload));
-                let metaReq = Promise.resolve(); // Promesa vacía por defecto
+                let metaReq = Promise.resolve({ status: 'Skipped' }); // Promesa vacía por defecto
                 if (data.situacion !== 'Alguien más vive ahí (traspaso informal)') {
                     metaReq = fetch(`https://graph.facebook.com/v19.0/${META_DATASET_ID}/events?access_token=${META_ACCESS_TOKEN}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(capiPayload)
-                    });
+                    }).then(async r => ({ status: r.status, body: await r.text() })).catch(e => ({ error: e.message }));
                 }
 
                 // GHL PAYLOAD (API V2: Contacts)
@@ -165,40 +165,53 @@ export default {
 
                 console.log("--> GHL PAYLOAD:", JSON.stringify(ghlPayload));
                 const ghlPromise = async () => {
-                    const res = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
-                        method: 'POST',
-                        headers: ghlHeaders,
-                        body: JSON.stringify(ghlPayload)
-                    });
+                    try {
+                        const res = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
+                            method: 'POST',
+                            headers: ghlHeaders,
+                            body: JSON.stringify(ghlPayload)
+                        });
+                        const bodyData = await res.text();
+                        let oppBodyData = null;
 
-                    if (res.ok) {
-                        const jsonRes = await res.json();
-                        const contactId = jsonRes.contact?.id;
+                        if (res.ok) {
+                            const jsonRes = JSON.parse(bodyData);
+                            const contactId = jsonRes.contact?.id;
 
-                        // Crear Oportunidad en Pipeline
-                        if (contactId) {
-                            const oppPayload = {
-                                locationId: GHL_LOCATION_ID,
-                                contactId: contactId,
-                                pipelineId: env.GHL_PIPELINE_ID || 'FTICLZZ1pokVnGmFYXam',
-                                pipelineStageId: env.GHL_STAGE_ID || '87ef379f-90a7-4060-99ff-de14eaadf628',
-                                name: `${rawName || 'Lead'} - Terra Landing`,
-                                status: "open"
-                            };
+                            // Crear Oportunidad en Pipeline
+                            if (contactId) {
+                                const oppPayload = {
+                                    locationId: GHL_LOCATION_ID,
+                                    contactId: contactId,
+                                    pipelineId: env.GHL_PIPELINE_ID || 'FTICLZZ1pokVnGmFYXam',
+                                    pipelineStageId: env.GHL_STAGE_ID || '87ef379f-90a7-4060-99ff-de14eaadf628',
+                                    name: `${rawName || 'Lead'} - Terra Landing`,
+                                    status: "open"
+                                };
 
-                            await fetch('https://services.leadconnectorhq.com/opportunities/', {
-                                method: 'POST',
-                                headers: ghlHeaders,
-                                body: JSON.stringify(oppPayload)
-                            });
+                                const oppRes = await fetch('https://services.leadconnectorhq.com/opportunities/', {
+                                    method: 'POST',
+                                    headers: ghlHeaders,
+                                    body: JSON.stringify(oppPayload)
+                                });
+                                oppBodyData = await oppRes.text();
+                            }
                         }
+                        return { status: res.status, body: bodyData, oppBody: oppBodyData };
+                    } catch (e) {
+                        return { error: e.message };
                     }
                 };
 
                 // PARALLEL EXECUTION (Fail-safe)
-                await Promise.allSettled([metaReq, ghlPromise()]);
+                const [metaResult, ghlResult] = await Promise.all([metaReq, ghlPromise()]);
 
-                return new Response(JSON.stringify({ success: true, event_id: data.event_id }), { headers, status: 200 });
+                return new Response(JSON.stringify({
+                    success: true,
+                    event_id: data.event_id,
+                    debug_meta: metaResult,
+                    debug_ghl: ghlResult
+                }), { headers, status: 200 });
 
             } catch (error) {
                 // Retornar 200 incluso si hay crash interno para que redirija a gracias.html
