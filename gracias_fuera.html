@@ -48,7 +48,7 @@
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -96,6 +96,26 @@
             </a>
         </div>
     </div>
+
+    <!-- META COMPLIANCE FOOTER -->
+    <footer
+        class="mt-auto pt-12 w-full text-center text-xs text-gray-400 font-body opacity-80 hover:opacity-100 transition-opacity">
+        <div class="max-w-4xl mx-auto flex flex-col items-center gap-2">
+            <p>&copy; 2026 Terra Compra Garantizada.</p>
+            <p><strong>Responsable:</strong> Ulises Monter Visuet (RFC: MOVU870103PSA) | <strong>Contacto:</strong>
+                privacidad@compragarantizadaterra.com</p>
+            <div class="flex gap-4 mt-1">
+                <a href="politica-privacidad.html" class="underline hover:text-terra-primary transition-colors">Aviso de
+                    Privacidad</a>
+                <a href="terminos.html" class="underline hover:text-terra-primary transition-colors">Términos y
+                    Condiciones</a>
+            </div>
+            <p class="text-[10px] mt-2 max-w-2xl text-center opacity-70">
+                Este sitio no es parte del sitio web de Facebook o Facebook Inc. Adicionalmente, este sitio NO está
+                respaldado por Facebook de ninguna manera. FACEBOOK es una marca registrada de FACEBOOK, Inc.
+            </p>
+        </div>
+    </footer>
 </body>
 
 </html>
