@@ -161,13 +161,20 @@ export default {
                                 { id: env.GHL_FIELD_UBICACION || 'pXWbHc17gFWLnPwh25ff', field_value: data.ubicacion || '' },
                                 { id: env.GHL_FIELD_URGENCIA || 'zZ6Yb7X4k3enahD3mgUO', field_value: data.urgencia || '' },
                                 {
-                                    id: env.GHL_FIELD_UTM_JOURNEY || 'OI507tXb9GeiGgN3FTID',
+                                    id: 'OI507tXb9GeiGgN3FTID', // Multi-Touch Journey
                                     field_value: JSON.stringify({
                                         first_click: data.first_touch || {},
                                         last_click: data.last_touch || {},
                                         all_touches: data.ad_journey || []
                                     })
-                                }
+                                },
+                                // Social Listening & Tracking Confirmed IDs
+                                { id: env.GHL_FIELD_GA4_CLIENT_ID || 'PENDING', field_value: data.ga4_client_id || '' },
+                                { id: env.GHL_FIELD_FBCLID || 'PENDING', field_value: data.fbclid || '' },
+                                { id: env.GHL_FIELD_SOURCE_ID || 'PENDING', field_value: data.last_touch?.utm_id || '' },
+                                { id: env.GHL_FIELD_SOURCE_URL || 'PENDING', field_value: data.source_url || '' },
+                                { id: env.GHL_FIELD_CTWACLID || 'PENDING', field_value: '' }, // Dejado vacío para leads de Web (Evita contaminación de campos de Whatsapp)
+                                { id: env.GHL_FIELD_AD_NAME || 'PENDING', field_value: data.last_touch?.utm_content || '' }
                             ]
                         };
 

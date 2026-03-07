@@ -643,9 +643,18 @@
         // ============================================
         function updateWhatsAppLinks() {
             const lastTouch = JSON.parse(localStorage.getItem('last_touch_utms') || '{}');
-            const utmStr = lastTouch.utm_campaign 
-                ? ` (Ref: ${lastTouch.utm_campaign}${lastTouch.utm_content ? ' | ' + lastTouch.utm_content : ''})`
-                : '';
+            
+            // Extrayendo GA4 Client ID (Sin FBCLID para no saturar el mensaje)
+            const gaCookie = getCookie('_ga');
+            const ga4_client_id = gaCookie ? gaCookie.split('.').slice(-2).join('.') : '';
+
+            // Construir la cadena de referencia
+            let refParts = [];
+            if (lastTouch.utm_campaign) refParts.push(`C: ${lastTouch.utm_campaign}`);
+            if (lastTouch.utm_content) refParts.push(`A: ${lastTouch.utm_content}`);
+            if (ga4_client_id) refParts.push(`GA4: ${ga4_client_id}`);
+
+            const utmStr = refParts.length > 0 ? ` (Ref: ${refParts.join(' | ')})` : '';
             
             document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
                 let url = new URL(link.href);
@@ -660,7 +669,8 @@
                    window.dataLayer.push({
                        'event': 'whatsapp_click',
                        'campaign': lastTouch.utm_campaign || 'organico',
-                       'content': lastTouch.utm_content || 'organico'
+                       'content': lastTouch.utm_content || 'organico',
+                       'ga4_client_id': ga4_client_id
                    });
                 });
             });
@@ -772,6 +782,13 @@
             // 2. Extracción Final
             formData.fbp = getCookie('_fbp');
             formData.fbc = getCookie('_fbc');
+            
+            // Extracción explícita para Social Listening
+            const gaCookie = getCookie('_ga');
+            formData.ga4_client_id = gaCookie ? gaCookie.split('.').slice(-2).join('.') : '';
+            const urlParams = new URLSearchParams(window.location.search);
+            formData.fbclid = urlParams.get('fbclid') || '';
+
             formData.source_url = window.location.href;
             formData.first_touch = JSON.parse(localStorage.getItem('first_touch_utms') || '{}');
             formData.last_touch = JSON.parse(localStorage.getItem('last_touch_utms') || '{}');
