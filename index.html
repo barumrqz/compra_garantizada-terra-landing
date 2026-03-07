@@ -84,26 +84,17 @@
         }
     </style>
 
-    <!-- ============================================ -->
-    <!-- META PIXEL (Facebook) — Replace YOUR_PIXEL_ID -->
-    <!-- ============================================ -->
     <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-            n.queue = []; t = b.createElement(e); t.async = !0;
-            t.src = v; s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '4175595052690139');
-        fbq('track', 'PageView');
+        window.dataLayer = window.dataLayer || [];
+        // Generador de UUID para deduplicación (EMQ)
+        function generateUUID() {
+            return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+        }
+        const event_id = (window.crypto && window.crypto.randomUUID) ? window.crypto.randomUUID() : generateUUID();
+        window.temp_event_id = event_id; // Para uso en el formulario final
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=4175595052690139&ev=PageView&noscript=1" /></noscript>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 
@@ -647,6 +638,35 @@
         }
         recordJourney();
 
+        // ============================================
+        // WHATSAPP FULL TRACKING (UTM Pass-through)
+        // ============================================
+        function updateWhatsAppLinks() {
+            const lastTouch = JSON.parse(localStorage.getItem('last_touch_utms') || '{}');
+            const utmStr = lastTouch.utm_campaign 
+                ? ` (Ref: ${lastTouch.utm_campaign}${lastTouch.utm_content ? ' | ' + lastTouch.utm_content : ''})`
+                : '';
+            
+            document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+                let url = new URL(link.href);
+                let text = url.searchParams.get('text') || 'Hola, quiero información';
+                if (!text.includes('(Ref:')) {
+                    url.searchParams.set('text', text + utmStr);
+                    link.href = url.toString();
+                }
+
+                // Evento GTM para clics de WhatsApp
+                link.addEventListener('click', () => {
+                   window.dataLayer.push({
+                       'event': 'whatsapp_click',
+                       'campaign': lastTouch.utm_campaign || 'organico',
+                       'content': lastTouch.utm_content || 'organico'
+                   });
+                });
+            });
+        }
+        updateWhatsAppLinks();
+
         function getCookie(name) {
             const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
             return v ? v.pop() : '';
@@ -678,7 +698,13 @@
                     this.parentElement.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
                     this.classList.add('selected');
 
-                    if (typeof fbq !== 'undefined') { fbq('trackCustom', 'FormStep', { step: currentStep, field }); }
+                    // GTM - Form Step Tracking
+                    window.dataLayer.push({
+                        'event': 'form_step',
+                        'step_number': currentStep,
+                        'step_field': field,
+                        'event_id': window.temp_event_id
+                    });
 
                     isTransitioning = true;
                     setTimeout(() => { nextStep(); isTransitioning = false; }, 350);
@@ -732,9 +758,16 @@
 
             formData.nombre = nombre; formData.telefono = telefono; formData.correo = correo;
 
-            // 1. UUID para Deduplicación
-            const event_id = (window.crypto && window.crypto.randomUUID) ? window.crypto.randomUUID() : generateUUID();
+            // 1. UUID para Deduplicación (Usando el generado al inicio)
+            const event_id = window.temp_event_id;
             formData.event_id = event_id;
+
+            // GTM - Lead Capture Tracking
+            window.dataLayer.push({
+                'event': 'lead_capture',
+                'event_id': event_id,
+                'content_name': 'Diagnostico Terra'
+            });
 
             // 2. Extracción Final
             formData.fbp = getCookie('_fbp');
@@ -744,10 +777,7 @@
             formData.last_touch = JSON.parse(localStorage.getItem('last_touch_utms') || '{}');
             formData.ad_journey = JSON.parse(localStorage.getItem('ad_journey') || '[]');
 
-            // 3. Pixel Local (Frontend Lead con EventID) - Omitido si la situación es traspaso informal
-            if (typeof fbq !== 'undefined' && formData.situacion !== 'Alguien más vive ahí (traspaso informal)') {
-                fbq('track', 'Lead', { content_name: 'Diagnostico Terra' }, { eventID: event_id });
-            }
+            // 3. Pixel Local (Omitido ya que GTM lo gestiona por el tag "Meta Lead Event")
 
             // 4. Server-Side Fetch a Cloudflare Worker
             try {
