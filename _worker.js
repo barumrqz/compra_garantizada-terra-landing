@@ -115,46 +115,10 @@ export default {
                     }).then(async r => ({ status: r.status, body: await r.text() })).catch(e => ({ error: e.message }));
                 }
 
-                // GHL PAYLOAD (API V2: Contacts)
-                // Usando upsert para actualizar si ya existe, buscando por email/teléfono
-                const ghlPayload = {
-                    locationId: GHL_LOCATION_ID,
-                    firstName: normFirstName,
-                    lastName: normLastName,
-                    email: normEmail,
-                    phone: '+' + normPhone, // GHL prefiere el formato internacional estandarizado
-                    tags: ["lead flipping", "diagnóstico compra garantizada", "api_directa"],
-                    source: "Terra Compra Garantizada",
-                    customFields: [
-                        // Aquí mapeas los Custom Fields Creados en tu Subcuenta
-                        // Debes conseguir el ID del campo en Settings > Custom Fields
-                        {
-                            id: env.GHL_FIELD_SITUACION || 'ZqhjRk3qpd6h72qrGHTJ',
-                            field_value: data.situacion || ''
-                        },
-                        {
-                            id: env.GHL_FIELD_ADEUDO || 'rSdAto1Gs3169a5Xoxm2',
-                            field_value: data.adeudo || ''
-                        },
-                        {
-                            id: env.GHL_FIELD_UBICACION || 'pXWbHc17gFWLnPwh25ff',
-                            field_value: data.ubicacion || ''
-                        },
-                        {
-                            id: env.GHL_FIELD_URGENCIA || 'zZ6Yb7X4k3enahD3mgUO',
-                            field_value: data.urgencia || ''
-                        },
-                        {
-                            id: env.GHL_FIELD_UTM_JOURNEY || 'OI507tXb9GeiGgN3FTID',
-                            // Convertimos el JSON extenso a texto para que sea visible en la ficha de GHL
-                            field_value: JSON.stringify({
-                                first_click: data.first_touch || {},
-                                last_click: data.last_touch || {},
-                                all_touches: data.ad_journey || []
-                            })
-                        }
-                    ]
-                };
+                // ==========================================
+                // GHL SMART UPSERT ALGORITHM (API V2)
+                // Evitar db_constraint fallido por mezcla de email/teléfono
+                // ==========================================
 
                 const ghlHeaders = {
                     'Authorization': `Bearer ${GHL_ACCESS_TOKEN}`,
@@ -163,20 +127,98 @@ export default {
                     'Accept': 'application/json'
                 };
 
-                console.log("--> GHL PAYLOAD:", JSON.stringify(ghlPayload));
-                const ghlPromise = async () => {
+                // Funciones Auxiliares GHL
+                const searchContact = async (query) => {
+                    if (!query) return null;
+                    const res = await fetch(`https://services.leadconnectorhq.com/contacts/search?query=${encodeURIComponent(query)}`, { headers: ghlHeaders });
+                    if (!res.ok) return null;
+                    const data = await res.json();
+                    return data.contacts && data.contacts.length > 0 ? data.contacts[0].id : null;
+                };
+
+                const ghlSmartPromise = async () => {
                     try {
-                        const res = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
-                            method: 'POST',
-                            headers: ghlHeaders,
-                            body: JSON.stringify(ghlPayload)
-                        });
+                        let contactId = null;
+                        let action = 'POST'; // DEFAULT
+
+                        // 1. BUSCAR POR TELÉFONO PRIMERO (Prioridad Inmobiliaria)
+                        if (normPhone) {
+                            contactId = await searchContact(normPhone);
+                        }
+
+                        // 2. BUSCAR POR CORREO SI NO HAY TELÉFONO
+                        if (!contactId && normEmail) {
+                            contactId = await searchContact(normEmail);
+                        }
+
+                        // PREPARAR DATOS COMUNES (Custom Fields y Tags)
+                        const commonPayload = {
+                            tags: ["lead flipping", "diagnóstico compra garantizada", "api_directa"],
+                            source: "Terra Compra Garantizada",
+                            customFields: [
+                                { id: env.GHL_FIELD_SITUACION || 'ZqhjRk3qpd6h72qrGHTJ', field_value: data.situacion || '' },
+                                { id: env.GHL_FIELD_ADEUDO || 'rSdAto1Gs3169a5Xoxm2', field_value: data.adeudo || '' },
+                                { id: env.GHL_FIELD_UBICACION || 'pXWbHc17gFWLnPwh25ff', field_value: data.ubicacion || '' },
+                                { id: env.GHL_FIELD_URGENCIA || 'zZ6Yb7X4k3enahD3mgUO', field_value: data.urgencia || '' },
+                                {
+                                    id: env.GHL_FIELD_UTM_JOURNEY || 'OI507tXb9GeiGgN3FTID',
+                                    field_value: JSON.stringify({
+                                        first_click: data.first_touch || {},
+                                        last_click: data.last_touch || {},
+                                        all_touches: data.ad_journey || []
+                                    })
+                                }
+                            ]
+                        };
+
+                        let res = null;
+                        
+                        // 3. DECISIÓN: ACTUALIZAR O CREAR
+                        if (contactId) {
+                            // UPDATE (PUT) - Para contactos existentes
+                            // TRUCO A25: Solo inyectamos el First Name, Common Fields y Tags, PERO dejamos los emails/phones fuera
+                            // para que la base de datos de GHL no patee error de restricción.
+                            const updatePayload = {
+                                ...commonPayload,
+                                firstName: normFirstName,
+                                lastName: normLastName
+                            };
+                            
+                            res = await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}`, {
+                                method: 'PUT',
+                                headers: ghlHeaders,
+                                body: JSON.stringify(updatePayload)
+                            });
+                            action = 'PUT';
+
+                        } else {
+                            // CREATE (POST) - Contacto totalmente nuevo
+                            const createPayload = {
+                                ...commonPayload,
+                                locationId: GHL_LOCATION_ID,
+                                firstName: normFirstName,
+                                lastName: normLastName,
+                                email: normEmail,
+                                phone: '+' + normPhone
+                            };
+
+                            res = await fetch('https://services.leadconnectorhq.com/contacts/', {
+                                method: 'POST',
+                                headers: ghlHeaders,
+                                body: JSON.stringify(createPayload)
+                            });
+                            action = 'POST';
+                        }
+
                         const bodyData = await res.text();
                         let oppBodyData = null;
 
                         if (res.ok) {
                             const jsonRes = JSON.parse(bodyData);
-                            const contactId = jsonRes.contact?.id;
+                            // Rescatar ContactID si era nuevo
+                            if (action === 'POST' && jsonRes.contact?.id) {
+                                contactId = jsonRes.contact.id;
+                            }
 
                             // Crear Oportunidad en Pipeline
                             if (contactId) {
@@ -197,14 +239,14 @@ export default {
                                 oppBodyData = await oppRes.text();
                             }
                         }
-                        return { status: res.status, body: bodyData, oppBody: oppBodyData };
+                        return { action: action, status: res.status, contactId: contactId, oppBody: oppBodyData };
                     } catch (e) {
-                        return { error: e.message };
+                         return { error: e.message };
                     }
                 };
 
                 // PARALLEL EXECUTION (Fail-safe)
-                const [metaResult, ghlResult] = await Promise.all([metaReq, ghlPromise()]);
+                const [metaResult, ghlResult] = await Promise.all([metaReq, ghlSmartPromise()]);
 
                 return new Response(JSON.stringify({
                     success: true,
