@@ -642,38 +642,66 @@
         // WHATSAPP FULL TRACKING (UTM Pass-through)
         // ============================================
         function updateWhatsAppLinks() {
-            const lastTouch = JSON.parse(localStorage.getItem('last_touch_utms') || '{}');
+            let attempts = 0;
+            const maxAttempts = 10;
             
-            // Extrayendo GA4 Client ID (Sin FBCLID para no saturar el mensaje)
-            const gaCookie = getCookie('_ga');
-            const ga4_client_id = gaCookie ? gaCookie.split('.').slice(-2).join('.') : '';
-
-            // Construir la cadena de referencia
-            let refParts = [];
-            if (lastTouch.utm_campaign) refParts.push(`C: ${lastTouch.utm_campaign}`);
-            if (lastTouch.utm_content) refParts.push(`A: ${lastTouch.utm_content}`);
-            if (ga4_client_id) refParts.push(`GA4: ${ga4_client_id}`);
-
-            const utmStr = refParts.length > 0 ? ` (Ref: ${refParts.join(' | ')})` : '';
-            
-            document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
-                let url = new URL(link.href);
-                let text = url.searchParams.get('text') || 'Hola, quiero información';
-                if (!text.includes('(Ref:')) {
-                    url.searchParams.set('text', text + utmStr);
-                    link.href = url.toString();
+            function tryUpdate() {
+                const gaCookie = getCookie('_ga');
+                const ga4_client_id = gaCookie ? gaCookie.split('.').slice(-2).join('.') : '';
+                const urlParams = new URLSearchParams(window.location.search);
+                const fbclid = urlParams.get('fbclid') || '';
+                
+                // Si no hay cookie aún y no hemos superado los intentos, reintentar en 1s
+                // GA4 a veces tarda un poco en setear la cookie
+                if (!ga4_client_id && attempts < maxAttempts) {
+                    attempts++;
+                    setTimeout(tryUpdate, 1000);
+                    return;
                 }
 
-                // Evento GTM para clics de WhatsApp
-                link.addEventListener('click', () => {
-                   window.dataLayer.push({
-                       'event': 'whatsapp_click',
-                       'campaign': lastTouch.utm_campaign || 'organico',
-                       'content': lastTouch.utm_content || 'organico',
-                       'ga4_client_id': ga4_client_id
-                   });
+                const lastTouch = JSON.parse(localStorage.getItem('last_touch_utms') || '{}');
+                let refParts = [];
+                if (lastTouch.utm_campaign) refParts.push(`C: ${lastTouch.utm_campaign}`);
+                if (lastTouch.utm_content) refParts.push(`A: ${lastTouch.utm_content}`);
+                if (ga4_client_id) refParts.push(`GA4: ${ga4_client_id}`);
+
+                const utmStr = refParts.length > 0 ? ` (Ref: ${refParts.join(' | ')})` : '';
+                
+                document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+                    let url = new URL(link.href);
+                    let text = url.searchParams.get('text') || 'Hola, quiero información';
+                    
+                    if (!url.searchParams.get('text').includes('(Ref:')) {
+                        url.searchParams.set('text', text + utmStr);
+                        link.href = url.toString();
+                    }
+
+                    // Limpiar listeners previos (clonando) para evitar duplicados si hay reintentos
+                    const newLink = link.cloneNode(true);
+                    link.parentNode.replaceChild(newLink, link);
+
+                    newLink.addEventListener('click', (e) => {
+                        const latestGa = getCookie('_ga');
+                        const latestId = latestGa ? latestGa.split('.').slice(-2).join('.') : ga4_client_id;
+                        const latestFbp = getCookie('_fbp');
+                        const latestFbc = getCookie('_fbc');
+                        const latestFbclid = new URLSearchParams(window.location.search).get('fbclid') || fbclid;
+                        
+                        window.dataLayer.push({
+                            'event': 'whatsapp_click',
+                            'campaign': lastTouch.utm_campaign || 'organico',
+                            'content': lastTouch.utm_content || 'organico',
+                            'ga4_client_id': latestId,
+                            'fbp': latestFbp,
+                            'fbc': latestFbc,
+                            'fbclid': latestFbclid,
+                            'source_url': window.location.href
+                        });
+                    });
                 });
-            });
+            }
+            
+            tryUpdate();
         }
         updateWhatsAppLinks();
 
