@@ -7,6 +7,13 @@
     <title>Vende tu Casa con Deuda de Infonavit | Terra Grupo Inmobiliario</title>
     <meta name="description"
         content="Compramos tu casa con deuda de Infonavit en San Luis Potosí. Liberación ante Notario, pagamos tus adeudos y te damos dinero en efectivo. Compra Garantizada.">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Vende tu Casa con Deuda de Infonavit | Terra">
+    <meta property="og:description"
+        content="Compramos tu casa, liquidamos tu deuda y te damos dinero en efectivo. Todo ante Notario Público.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://compragarantizadaterra.com">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap"
@@ -86,14 +93,14 @@
 
     <script>
         window.dataLayer = window.dataLayer || [];
-        // Generador de UUID para deduplicación (EMQ)
+        // UUID para deduplicación (EMQ)
         function generateUUID() {
             return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
                 (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
             );
         }
         const event_id = (window.crypto && window.crypto.randomUUID) ? window.crypto.randomUUID() : generateUUID();
-        window.temp_event_id = event_id; // Para uso en el formulario final
+        window.temp_event_id = event_id;
     </script>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -106,14 +113,17 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 
-<body class="bg-terra-cream text-terra-secondary overflow-x-hidden min-h-screen flex flex-col body-fixed">
+<body class="bg-terra-cream text-terra-secondary overflow-x-hidden min-h-screen flex flex-col">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/gtm.js?id=GTM-5DLR9WJ7"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- NAVBAR -->
-    <nav class="w-full py-3 px-5 md:px-10 flex justify-between items-center bg-white shadow-sm sticky top-0 z-50">
+    <!-- ============================================ -->
+    <!-- NAVBAR                                       -->
+    <!-- ============================================ -->
+    <nav aria-label="Navegación principal"
+        class="w-full py-3 px-5 md:px-10 flex justify-between items-center bg-white shadow-sm sticky top-0 z-50">
         <div class="flex items-center gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" class="w-9 h-9">
                 <rect x="0" y="0" width="220" height="220" rx="45" fill="#1A2530" />
@@ -134,7 +144,7 @@
     </nav>
 
     <!-- ============================================ -->
-    <!-- HERO — Warm, Approachable, Human             -->
+    <!-- HERO — Sin CTAs, con benefits actualizados   -->
     <!-- ============================================ -->
     <section class="w-full px-5 md:px-8 pt-10 md:pt-14 pb-10 bg-white hero-pattern relative">
         <div class="max-w-3xl mx-auto">
@@ -160,8 +170,8 @@
                     class="text-terra-secondary">Todo ante Notario Público</strong>. Sin traspasos ilegales.
             </p>
 
-            <!-- Quick Benefits Row -->
-            <div class="flex flex-wrap gap-3 mb-8">
+            <!-- Quick Benefits Row (updated) -->
+            <div class="flex flex-wrap gap-3 mb-4">
                 <span
                     class="inline-flex items-center gap-1.5 bg-terra-bg rounded-full px-4 py-2 text-sm font-medium text-terra-secondary border border-gray-200">
                     ✅ Pagamos tus adeudos
@@ -172,28 +182,200 @@
                 </span>
                 <span
                     class="inline-flex items-center gap-1.5 bg-terra-bg rounded-full px-4 py-2 text-sm font-medium text-terra-secondary border border-gray-200">
-                    ✅ $10,000 de anticipo
+                    ✅ Cobra más de $500,000
+                </span>
+                <span
+                    class="inline-flex items-center gap-1.5 bg-terra-bg rounded-full px-4 py-2 text-sm font-medium text-terra-secondary border border-gray-200">
+                    ✅ Sin comisiones ni cargos ocultos
                 </span>
             </div>
 
-            <!-- CTA -->
-            <div class="flex flex-col sm:flex-row gap-3">
-                <a href="#diagnostico"
-                    class="inline-block bg-terra-primary hover:bg-orange-600 text-white text-base font-bold py-4 px-8 rounded-xl transition-all font-heading text-center shadow-lg shadow-orange-200">
-                    Quiero que evalúen mi caso →
-                </a>
-                <a href="https://wa.me/524446687573?text=Hola%2C%20quiero%20vender%20mi%20casa%20con%20deuda%20de%20Infonavit"
-                    class="inline-flex items-center justify-center gap-2 bg-terra-accent/10 hover:bg-terra-accent/20 text-terra-accent text-base font-bold py-4 px-8 rounded-xl transition-all font-heading border border-terra-accent/30">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                    </svg>
-                    Escribir por WhatsApp
-                </a>
+            <a href="#diagnostico"
+                class="inline-block mt-5 bg-terra-primary hover:bg-orange-600 text-white text-base font-bold py-4 px-8 rounded-xl transition-all font-heading shadow-lg shadow-orange-200">
+                Quiero que evalúen mi caso →
+            </a>
+
+            <p class="text-gray-400 text-xs mt-3 font-body">Evaluación gratuita, sin compromiso. Solo propiedades en
+                SLP.</p>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- MULTI-STEP FORM (Progressive Submission)    -->
+    <!-- ============================================ -->
+    <section id="diagnostico" class="w-full px-5 md:px-8 py-14 bg-terra-bg border-t-4 border-terra-primary">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center gap-2 bg-terra-primary/10 rounded-full px-4 py-1.5 mb-3">
+                    <span class="text-terra-primary font-bold text-xs font-heading uppercase tracking-wide">Evaluación
+                        gratuita</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-terra-secondary tracking-tight font-heading">
+                    Cuéntanos tu situación
+                </h2>
+                <p class="text-gray-500 text-sm mt-2 font-body">Tus datos primero, luego 4 preguntas rápidas. Te
+                    contactamos en menos de 24 horas.</p>
             </div>
 
-            <p class="text-gray-400 text-xs mt-4 font-body">Evaluación gratuita, sin compromiso. Solo propiedades en
-                SLP.</p>
+            <!-- Progress -->
+            <div class="flex items-center gap-2 mb-6">
+                <div id="progressBar" class="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
+                    <div id="progressFill" class="bg-terra-primary h-2 rounded-full transition-all duration-300"
+                        style="width: 20%"></div>
+                </div>
+                <span id="stepCounter" class="text-xs text-gray-400 font-medium font-body">1/5</span>
+            </div>
+
+            <form id="terraForm" onsubmit="return false;">
+
+                <!-- STEP 1: Contact Info -->
+                <div class="form-step step-active" data-step="1">
+                    <p class="text-terra-secondary font-bold text-base mb-2 font-heading">¡Empecemos!</p>
+                    <p class="text-gray-500 text-sm mb-5 font-body">Déjanos tus datos y te contactamos en menos de 24
+                        horas con una propuesta.</p>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-terra-secondary mb-1 font-heading">Tu
+                                nombre</label>
+                            <input type="text" name="nombre" id="nombre" required placeholder="Ej: Juan Pérez"
+                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-terra-secondary font-medium focus:border-terra-primary focus:outline-none transition-colors font-body bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-terra-secondary mb-1 font-heading">Tu
+                                WhatsApp (10 dígitos)</label>
+                            <input type="tel" name="telefono" id="telefono" required placeholder="Ej: 444 123 4567"
+                                pattern="[0-9\s]{10,13}" maxlength="13"
+                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-terra-secondary font-medium focus:border-terra-primary focus:outline-none transition-colors font-body bg-white">
+                            <p id="phoneError" class="text-red-500 text-xs mt-1 hidden font-body">Ingresa un número válido de 10 dígitos.</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-terra-secondary mb-1 font-heading">Tu correo
+                                electrónico</label>
+                            <input type="email" name="correo" id="correo" required placeholder="Ej: juan@correo.com"
+                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-terra-secondary font-medium focus:border-terra-primary focus:outline-none transition-colors font-body bg-white">
+                        </div>
+                        <button type="button" id="btnContactSubmit" onclick="submitContactInfo()"
+                            class="w-full bg-terra-primary hover:bg-orange-600 text-white font-extrabold text-base py-4 rounded-xl transition-all uppercase tracking-wide font-heading shadow-lg shadow-orange-200">
+                            SIGUIENTE →
+                        </button>
+                        <p class="text-gray-400 text-xs text-center font-body">Tus datos están protegidos. Cero spam.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Situación -->
+                <div class="form-step step-hidden" data-step="2">
+                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿Cuál es tu situación actual?
+                    </p>
+                    <div class="space-y-3">
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="situacion" data-value="No vivo ahí y sigo pagando">
+                            <span class="font-medium text-terra-secondary text-sm font-body">🏚️ No vivo ahí y sigo
+                                pagando</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="situacion" data-value="Vivo ahí pero ya no puedo pagar">
+                            <span class="font-medium text-terra-secondary text-sm font-body">😰 Vivo ahí pero ya no
+                                puedo pagar</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="situacion" data-value="La casa está abandonada">
+                            <span class="font-medium text-terra-secondary text-sm font-body">🔒 La casa está
+                                abandonada</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="situacion" data-value="Alguien más vive ahí (traspaso informal)">
+                            <span class="font-medium text-terra-secondary text-sm font-body">👤 Alguien más vive ahí
+                                (traspaso informal)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Adeudo -->
+                <div class="form-step step-hidden" data-step="3">
+                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿Tienes idea de cuánto debes
+                        al Infonavit?</p>
+                    <div class="space-y-3">
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="adeudo" data-value="Menos de $200,000">
+                            <span class="font-medium text-terra-secondary text-sm font-body">Menos de $200,000</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="adeudo" data-value="Entre $200,000 y $400,000">
+                            <span class="font-medium text-terra-secondary text-sm font-body">Entre $200,000 y
+                                $400,000</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="adeudo" data-value="Más de $400,000">
+                            <span class="font-medium text-terra-secondary text-sm font-body">Más de $400,000</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="adeudo" data-value="No sé cuánto debo">
+                            <span class="font-medium text-terra-secondary text-sm font-body">🤷 No sé cuánto debo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Ubicación -->
+                <div class="form-step step-hidden" data-step="4">
+                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿En qué zona de SLP está tu
+                        casa?</p>
+                    <div class="space-y-3">
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="ubicacion" data-value="Soledad de Graciano Sánchez">
+                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Soledad de Graciano
+                                Sánchez</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="ubicacion" data-value="Zona sur / Prados / Hogares del Real">
+                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Zona sur / Prados /
+                                Hogares del Real</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="ubicacion" data-value="Zona centro / otra colonia">
+                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Zona centro / otra
+                                colonia</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="ubicacion" data-value="Fuera de SLP (otro estado)">
+                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Fuera de SLP (otro
+                                estado)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 5: Urgencia -->
+                <div class="form-step step-hidden" data-step="5">
+                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿Qué tan urgente es para ti
+                        resolver esto?</p>
+                    <div class="space-y-3">
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="urgencia" data-value="Esta semana necesito resolverlo">
+                            <span class="font-medium text-terra-secondary text-sm font-body">🔥 Esta semana necesito
+                                resolverlo</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="urgencia" data-value="Este mes quiero avanzar">
+                            <span class="font-medium text-terra-secondary text-sm font-body">⏰ Este mes quiero
+                                avanzar</span>
+                        </div>
+                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
+                            data-field="urgencia" data-value="Solo estoy explorando opciones">
+                            <span class="font-medium text-terra-secondary text-sm font-body">🔍 Solo estoy explorando
+                                opciones</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div id="formNav" class="flex justify-between mt-5">
+                    <button type="button" id="btnBack" onclick="prevStep()"
+                        class="text-gray-400 hover:text-terra-secondary font-semibold text-sm py-2 px-4 rounded-lg transition-colors hidden font-body">
+                        ← Atrás
+                    </button>
+                    <div class="flex-1"></div>
+                </div>
+            </form>
         </div>
     </section>
 
@@ -266,6 +448,27 @@
                         a ser tuya. Capítulo cerrado.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CTA BUTTONS — Reubicados del Hero           -->
+    <!-- ============================================ -->
+    <section class="w-full px-5 md:px-8 py-8 bg-white">
+        <div class="max-w-3xl mx-auto flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="#diagnostico"
+                class="inline-block bg-terra-primary hover:bg-orange-600 text-white text-base font-bold py-4 px-8 rounded-xl transition-all font-heading text-center shadow-lg shadow-orange-200">
+                Quiero que evalúen mi caso →
+            </a>
+            <a href="https://wa.me/524446687573?text=Hola%2C%20quiero%20vender%20mi%20casa%20con%20deuda%20de%20Infonavit"
+                target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 bg-terra-accent/10 hover:bg-terra-accent/20 text-terra-accent text-base font-bold py-4 px-8 rounded-xl transition-all font-heading border border-terra-accent/30">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                Escribir por WhatsApp
+            </a>
         </div>
     </section>
 
@@ -400,188 +603,11 @@
         </div>
     </section>
 
-    <!-- ============================================ -->
-    <!-- MULTI-STEP FORM                             -->
-    <!-- ============================================ -->
-    <section id="diagnostico" class="w-full px-5 md:px-8 py-14 bg-white border-t-4 border-terra-primary">
-        <div class="max-w-lg mx-auto">
-            <div class="text-center mb-8">
-                <div class="inline-flex items-center gap-2 bg-terra-primary/10 rounded-full px-4 py-1.5 mb-3">
-                    <span class="text-terra-primary font-bold text-xs font-heading uppercase tracking-wide">Evaluación
-                        gratuita</span>
-                </div>
-                <h2 class="text-2xl md:text-3xl font-extrabold text-terra-secondary tracking-tight font-heading">
-                    Cuéntanos tu situación
-                </h2>
-                <p class="text-gray-500 text-sm mt-2 font-body">4 preguntas rápidas y tus datos. Te contactamos en menos
-                    de 24
-                    horas.</p>
-            </div>
-
-            <!-- Progress -->
-            <div class="flex items-center gap-2 mb-6">
-                <div id="progressBar" class="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
-                    <div id="progressFill" class="bg-terra-primary h-2 rounded-full transition-all duration-300"
-                        style="width: 20%"></div>
-                </div>
-                <span id="stepCounter" class="text-xs text-gray-400 font-medium font-body">1/5</span>
-            </div>
-
-            <form id="terraForm" onsubmit="return false;">
-
-                <!-- STEP 1 -->
-                <div class="form-step step-active" data-step="1">
-                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿Cuál es tu situación actual?
-                    </p>
-                    <div class="space-y-3">
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="situacion" data-value="No vivo ahí y sigo pagando">
-                            <span class="font-medium text-terra-secondary text-sm font-body">🏚️ No vivo ahí y sigo
-                                pagando</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="situacion" data-value="Vivo ahí pero ya no puedo pagar">
-                            <span class="font-medium text-terra-secondary text-sm font-body">😰 Vivo ahí pero ya no
-                                puedo pagar</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="situacion" data-value="La casa está abandonada">
-                            <span class="font-medium text-terra-secondary text-sm font-body">🔒 La casa está
-                                abandonada</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="situacion" data-value="Alguien más vive ahí (traspaso informal)">
-                            <span class="font-medium text-terra-secondary text-sm font-body">👤 Alguien más vive ahí
-                                (traspaso informal)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- STEP 2 -->
-                <div class="form-step step-hidden" data-step="2">
-                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿Tienes idea de cuánto debes
-                        al Infonavit?</p>
-                    <div class="space-y-3">
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="adeudo" data-value="Menos de $200,000">
-                            <span class="font-medium text-terra-secondary text-sm font-body">Menos de $200,000</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="adeudo" data-value="Entre $200,000 y $400,000">
-                            <span class="font-medium text-terra-secondary text-sm font-body">Entre $200,000 y
-                                $400,000</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="adeudo" data-value="Más de $400,000">
-                            <span class="font-medium text-terra-secondary text-sm font-body">Más de $400,000</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="adeudo" data-value="No sé cuánto debo">
-                            <span class="font-medium text-terra-secondary text-sm font-body">🤷 No sé cuánto debo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- STEP 3 -->
-                <div class="form-step step-hidden" data-step="3">
-                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿En qué zona de SLP está tu
-                        casa?</p>
-                    <div class="space-y-3">
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="ubicacion" data-value="Soledad de Graciano Sánchez">
-                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Soledad de Graciano
-                                Sánchez</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="ubicacion" data-value="Zona sur / Prados / Hogares del Real">
-                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Zona sur / Prados /
-                                Hogares del Real</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="ubicacion" data-value="Zona centro / otra colonia">
-                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Zona centro / otra
-                                colonia</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="ubicacion" data-value="Fuera de SLP (otro estado)">
-                            <span class="font-medium text-terra-secondary text-sm font-body">📍 Fuera de SLP (otro
-                                estado)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- STEP 4 -->
-                <div class="form-step step-hidden" data-step="4">
-                    <p class="text-terra-secondary font-bold text-base mb-4 font-heading">¿Qué tan urgente es para ti
-                        resolver esto?</p>
-                    <div class="space-y-3">
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="urgencia" data-value="Esta semana necesito resolverlo">
-                            <span class="font-medium text-terra-secondary text-sm font-body">🔥 Esta semana necesito
-                                resolverlo</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="urgencia" data-value="Este mes quiero avanzar">
-                            <span class="font-medium text-terra-secondary text-sm font-body">⏰ Este mes quiero
-                                avanzar</span>
-                        </div>
-                        <div class="option-card block cursor-pointer border-2 border-gray-200 rounded-xl p-4 bg-white"
-                            data-field="urgencia" data-value="Solo estoy explorando opciones">
-                            <span class="font-medium text-terra-secondary text-sm font-body">🔍 Solo estoy explorando
-                                opciones</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- STEP 5: Contact -->
-                <div class="form-step step-hidden" data-step="5">
-                    <p class="text-terra-secondary font-bold text-base mb-2 font-heading">¡Último paso!</p>
-                    <p class="text-gray-500 text-sm mb-5 font-body">Déjanos tus datos y te contactamos en menos de 24
-                        horas con una propuesta.</p>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-semibold text-terra-secondary mb-1 font-heading">Tu
-                                nombre</label>
-                            <input type="text" name="nombre" id="nombre" required placeholder="Ej: Juan Pérez"
-                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-terra-secondary font-medium focus:border-terra-primary focus:outline-none transition-colors font-body bg-terra-bg">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-terra-secondary mb-1 font-heading">Tu
-                                WhatsApp (10 dígitos)</label>
-                            <input type="tel" name="telefono" id="telefono" required placeholder="Ej: 444 123 4567"
-                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-terra-secondary font-medium focus:border-terra-primary focus:outline-none transition-colors font-body bg-terra-bg">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-terra-secondary mb-1 font-heading">Tu correo
-                                electrónico</label>
-                            <input type="email" name="correo" id="correo" required placeholder="Ej: juan@correo.com"
-                                class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-terra-secondary font-medium focus:border-terra-primary focus:outline-none transition-colors font-body bg-terra-bg">
-                        </div>
-                        <button type="button" onclick="submitForm()"
-                            class="w-full bg-terra-primary hover:bg-orange-600 text-white font-extrabold text-base py-4 rounded-xl transition-all uppercase tracking-wide font-heading shadow-lg shadow-orange-200">
-                            ENVIAR MI CASO →
-                        </button>
-                        <p class="text-gray-400 text-xs text-center font-body">Tus datos están protegidos. Cero spam.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Navigation -->
-                <div id="formNav" class="flex justify-between mt-5">
-                    <button type="button" id="btnBack" onclick="prevStep()"
-                        class="text-gray-400 hover:text-terra-secondary font-semibold text-sm py-2 px-4 rounded-lg transition-colors hidden font-body">
-                        ← Atrás
-                    </button>
-                    <div class="flex-1"></div>
-                </div>
-            </form>
-        </div>
-    </section>
-
     <!-- CTA FINAL -->
     <section class="w-full px-5 md:px-8 py-10 bg-terra-secondary text-center">
         <p class="text-gray-300 text-sm mb-3 font-body max-w-md mx-auto">¿Prefieres hablar con alguien directamente?</p>
         <a href="https://wa.me/524446687573?text=Hola%2C%20quiero%20vender%20mi%20casa%20con%20deuda%20de%20Infonavit"
+            target="_blank" rel="noopener noreferrer"
             class="inline-flex items-center gap-2 bg-terra-accent hover:bg-green-600 text-white font-bold py-3 px-8 rounded-xl transition-all font-heading text-sm">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -614,7 +640,9 @@
         </div>
     </footer>
 
-    <!-- LOGIC (V5 Server-side Tracking) -->
+    <!-- ============================================================ -->
+    <!-- LOGIC (V6 Progressive Server-side Tracking)                  -->
+    <!-- ============================================================ -->
     <script>
         // ============================================
         // UTM & JOURNEY LOGGER (Multi-Touch Attribution)
@@ -632,18 +660,15 @@
 
         function recordJourney() {
             const currentUTMs = parseUTMs();
-            if (Object.keys(currentUTMs).length === 0) return; // Ignore pure organic to not mess up historical touches
+            if (Object.keys(currentUTMs).length === 0) return;
 
             const timestamp = new Date().toISOString();
             const touchPoint = { ...currentUTMs, timestamp: timestamp };
 
-            // FIRST TOUCH
             if (!localStorage.getItem('first_touch_utms')) {
                 localStorage.setItem('first_touch_utms', JSON.stringify(touchPoint));
             }
-            // LAST TOUCH
             localStorage.setItem('last_touch_utms', JSON.stringify(touchPoint));
-            // AD JOURNEY
             let journey = JSON.parse(localStorage.getItem('ad_journey') || '[]');
             journey.push(touchPoint);
             localStorage.setItem('ad_journey', JSON.stringify(journey));
@@ -656,15 +681,13 @@
         function updateWhatsAppLinks() {
             let attempts = 0;
             const maxAttempts = 10;
-            
+
             function tryUpdate() {
                 const gaCookie = getCookie('_ga');
                 const ga4_client_id = gaCookie ? gaCookie.split('.').slice(-2).join('.') : '';
                 const urlParams = new URLSearchParams(window.location.search);
                 const fbclid = urlParams.get('fbclid') || '';
-                
-                // Si no hay cookie aún y no hemos superado los intentos, reintentar en 1s
-                // GA4 a veces tarda un poco en setear la cookie
+
                 if (!ga4_client_id && attempts < maxAttempts) {
                     attempts++;
                     setTimeout(tryUpdate, 1000);
@@ -678,17 +701,17 @@
                 if (ga4_client_id) refParts.push(`GA4: ${ga4_client_id}`);
 
                 const utmStr = refParts.length > 0 ? ` (Ref: ${refParts.join(' | ')})` : '';
-                
+
                 document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
                     let url = new URL(link.href);
                     let text = url.searchParams.get('text') || 'Hola, quiero información';
-                    
-                    if (!url.searchParams.get('text').includes('(Ref:')) {
+
+                    // Fixed: optional chaining to prevent null reference
+                    if (!text?.includes('(Ref:')) {
                         url.searchParams.set('text', text + utmStr);
                         link.href = url.toString();
                     }
 
-                    // Limpiar listeners previos (clonando) para evitar duplicados si hay reintentos
                     const newLink = link.cloneNode(true);
                     link.parentNode.replaceChild(newLink, link);
 
@@ -698,7 +721,7 @@
                         const latestFbp = getCookie('_fbp');
                         const latestFbc = getCookie('_fbc');
                         const latestFbclid = new URLSearchParams(window.location.search).get('fbclid') || fbclid;
-                        
+
                         window.dataLayer.push({
                             'event': 'whatsapp_click',
                             'campaign': lastTouch.utm_campaign || 'organico',
@@ -712,7 +735,7 @@
                     });
                 });
             }
-            
+
             tryUpdate();
         }
         updateWhatsAppLinks();
@@ -723,12 +746,13 @@
         }
 
         // ============================================
-        // FORM WIZARD STATE
+        // FORM WIZARD STATE (V6 - Progressive)
         // ============================================
         let currentStep = 1;
         const totalSteps = 5;
         const formData = {};
         let isTransitioning = false;
+        let ghlContactId = null; // Stored after Step 1 submit
 
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.option-card[data-field]').forEach(card => {
@@ -736,12 +760,6 @@
                     if (isTransitioning) return;
                     const field = this.dataset.field;
                     const value = this.dataset.value;
-
-                    // DISQUALIFIER LÓGICO
-                    if (field === 'ubicacion' && value === 'Fuera de SLP (otro estado)') {
-                        window.location.href = 'gracias_fuera.html';
-                        return;
-                    }
 
                     formData[field] = value;
 
@@ -758,6 +776,24 @@
                     });
 
                     isTransitioning = true;
+
+                    // DISQUALIFIER: Fuera de SLP → redirect WITHOUT Meta event
+                    if (field === 'ubicacion' && value === 'Fuera de SLP (otro estado)') {
+                        // Update GHL field before redirecting
+                        updateGHLField(field, value);
+                        setTimeout(() => { window.location.href = 'gracias_fuera.html'; }, 400);
+                        return;
+                    }
+
+                    // Update GHL field progressively
+                    updateGHLField(field, value);
+
+                    // If this is the LAST step (urgencia), fire Meta CAPI and redirect
+                    if (currentStep === totalSteps) {
+                        completeLeadWithMeta();
+                        return;
+                    }
+
                     setTimeout(() => { nextStep(); isTransitioning = false; }, 350);
                 });
             });
@@ -786,67 +822,140 @@
         }
 
         // ============================================
-        // FORM SUBMIT (UUID + CAPI Fetch + Redirección)
+        // STEP 1: Submit Contact Info → Create GHL Lead
         // ============================================
-        function generateUUID() {
-            return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
-                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-            );
-        }
-
-        async function submitForm() {
+        async function submitContactInfo() {
             const nombre = document.getElementById('nombre').value.trim();
             const telefono = document.getElementById('telefono').value.trim();
             const correo = document.getElementById('correo').value.trim();
 
-            if (!nombre || !telefono || !correo) { alert('Por favor completa todos tus datos.'); return; }
+            // Validate
+            if (!nombre || !telefono || !correo) {
+                alert('Por favor completa todos tus datos.');
+                return;
+            }
 
-            const btn = document.querySelector('button[onclick="submitForm()"]');
+            // Phone validation: exactly 10 digits
+            const phoneDigits = telefono.replace(/\D/g, '');
+            if (phoneDigits.length !== 10) {
+                document.getElementById('phoneError').classList.remove('hidden');
+                document.getElementById('telefono').focus();
+                return;
+            }
+            document.getElementById('phoneError').classList.add('hidden');
+
+            // Email basic validation
+            if (!correo.includes('@') || !correo.includes('.')) {
+                alert('Por favor ingresa un correo electrónico válido.');
+                return;
+            }
+
+            const btn = document.getElementById('btnContactSubmit');
             if (btn) {
                 btn.innerHTML = 'ENVIANDO...';
                 btn.disabled = true;
             }
 
-            formData.nombre = nombre; formData.telefono = telefono; formData.correo = correo;
-
-            // 1. UUID para Deduplicación (Usando el generado al inicio)
-            const event_id = window.temp_event_id;
-            formData.event_id = event_id;
+            formData.nombre = nombre;
+            formData.telefono = telefono;
+            formData.correo = correo;
+            formData.event_id = window.temp_event_id;
 
             // GTM - Lead Capture Tracking
             window.dataLayer.push({
                 'event': 'lead_capture',
-                'event_id': event_id,
+                'event_id': formData.event_id,
                 'content_name': 'Diagnostico Terra'
             });
 
-            // 2. Extracción Final
+            // Tracking extraction
             formData.fbp = getCookie('_fbp');
             formData.fbc = getCookie('_fbc');
-            
-            // Extracción explícita para Social Listening
             const gaCookie = getCookie('_ga');
             formData.ga4_client_id = gaCookie ? gaCookie.split('.').slice(-2).join('.') : '';
             const urlParams = new URLSearchParams(window.location.search);
             formData.fbclid = urlParams.get('fbclid') || '';
-
             formData.source_url = window.location.href;
             formData.first_touch = JSON.parse(localStorage.getItem('first_touch_utms') || '{}');
             formData.last_touch = JSON.parse(localStorage.getItem('last_touch_utms') || '{}');
             formData.ad_journey = JSON.parse(localStorage.getItem('ad_journey') || '[]');
 
-            // 3. Pixel Local (Omitido ya que GTM lo gestiona por el tag "Meta Lead Event")
-
-            // 4. Server-Side Fetch a Cloudflare Worker
+            // POST /api/lead → Create GHL contact + opportunity
             try {
-                await fetch('/api/lead', {
+                const res = await fetch('/api/lead', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
-            } catch (e) { console.error('Worker fetch fail:', e); }
+                const data = await res.json();
+                if (data.contactId) {
+                    ghlContactId = data.contactId;
+                }
+            } catch (e) {
+                console.error('Lead creation fetch fail:', e);
+            }
 
-            // 5. Redireccionar SIEMPRE, haya fetch exitoso o no (Fail-safe)
+            // Advance to step 2 regardless
+            nextStep();
+            isTransitioning = false;
+            if (btn) {
+                btn.innerHTML = 'SIGUIENTE →';
+                btn.disabled = false;
+            }
+        }
+
+        // ============================================
+        // UPDATE GHL FIELD (Steps 2-5)
+        // ============================================
+        async function updateGHLField(field, value) {
+            if (!ghlContactId) return;
+            try {
+                await fetch('/api/lead-update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contactId: ghlContactId,
+                        field: field,
+                        value: value
+                    })
+                });
+            } catch (e) {
+                console.error('Lead update fetch fail:', e);
+            }
+        }
+
+        // ============================================
+        // COMPLETE: Fire Meta CAPI (Last Step Only)
+        // ============================================
+        async function completeLeadWithMeta() {
+            try {
+                await fetch('/api/lead-complete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        event_id: formData.event_id,
+                        nombre: formData.nombre,
+                        telefono: formData.telefono,
+                        correo: formData.correo,
+                        situacion: formData.situacion,
+                        adeudo: formData.adeudo,
+                        ubicacion: formData.ubicacion,
+                        urgencia: formData.urgencia,
+                        fbp: formData.fbp,
+                        fbc: formData.fbc,
+                        ga4_client_id: formData.ga4_client_id,
+                        fbclid: formData.fbclid,
+                        source_url: formData.source_url,
+                        first_touch: formData.first_touch,
+                        last_touch: formData.last_touch,
+                        ad_journey: formData.ad_journey
+                    })
+                });
+            } catch (e) {
+                console.error('Lead complete fetch fail:', e);
+            }
+
+            // Redirect ALWAYS (fail-safe)
             window.location.href = 'gracias.html';
         }
     </script>
