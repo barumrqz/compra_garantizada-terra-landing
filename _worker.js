@@ -7,10 +7,11 @@ export default {
         const url = new URL(request.url);
 
         // CORS headers compartidos
+        const allowedOrigin = env.ALLOWED_ORIGIN || '*';
         const corsHeaders = {
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': allowedOrigin,
             'Access-Control-Allow-Methods': 'POST, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Validation'
+            'Access-Control-Allow-Headers': 'Content-Type'
         };
         const jsonHeaders = { ...corsHeaders, 'Content-Type': 'application/json' };
 
